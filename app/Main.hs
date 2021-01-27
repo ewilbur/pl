@@ -13,7 +13,7 @@ import Data.Predicate
 
 main :: IO ()
 main = do
-    formula <- parse wff "" . Text.pack . concat <$> getArgs
+    formula <- parse (do {w <- wff; eof; return w}) "" . Text.pack . concat <$> getArgs
     either (const $ putStrLn "Not a well formed formula") formulaInfo formula
     print formula
         where
